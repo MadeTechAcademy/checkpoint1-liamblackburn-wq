@@ -10,6 +10,10 @@ def test_html_created(tmp_path):
 
     assert html.exists()
 
+# ATDD Criteria (ensures program meets user expectation)
+def test_html_contains_duties(tmp_path):
+    pass
+
 def testIt():
     assert len(x2) > 10
     assert True is True
