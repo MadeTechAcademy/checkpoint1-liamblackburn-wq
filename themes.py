@@ -41,5 +41,6 @@ if __name__=="__main__":
         display_duties_to_console()
     elif choice == "2":
         save_duties_to_html(duties_list)
-
+    else:
+        print("Invalid choice. Please select option 1 or option 2")
 
