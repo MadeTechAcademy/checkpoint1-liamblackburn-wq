@@ -1,11 +1,11 @@
-from themes import x2, save_duties_to_html
+from themes import duties_list, save_duties_to_html
 
 # TDD Criteria
 def test_html_created(tmp_path):
     # temp directory unique to each test func
     html = tmp_path / "duties.html" 
 
-    save_duties_to_html(x2, html)
+    save_duties_to_html(duties_list, html)
 
     assert html.exists()
 
@@ -13,7 +13,7 @@ def test_html_created(tmp_path):
 def test_html_contains_duties(tmp_path):
     html = tmp_path / "duties.html" 
 
-    save_duties_to_html(x2, html)
+    save_duties_to_html(duties_list, html)
 
     content = html.read_text(encoding="utf-8")
     
@@ -23,6 +23,5 @@ def test_html_contains_duties(tmp_path):
     assert "Duty" in content
 
 def testIt():
-    assert len(x2) > 10
-    assert True is True
+    assert len(duties_list) == 13
     
