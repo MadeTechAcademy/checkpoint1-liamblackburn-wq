@@ -66,3 +66,4 @@ https://www.w3schools.com/python/python_file_write.
 https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files
 https://www.geeksforgeeks.org/python/writing-to-file-in-python/
 https://docs.pytest.org/en/stable/how-to/tmp_path.html
+https://decode.agency/article/tdd-vs-bdd-vs-attd/

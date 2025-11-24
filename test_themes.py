@@ -1,4 +1,3 @@
-from pathlib import Path
 from themes import x2, save_duties_to_html
 
 # TDD Criteria
