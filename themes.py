@@ -14,6 +14,10 @@ x2 = [
     "Duty 13 Accept ownership of changes; embody the DevOps culture of 'you build it, you run it', with a relentless focus on the user experience.",
 ]#list of duties
 
+def save_duties_to_html(duties, filename="duties.html"):
+    pass
+
+
 def go():
     for y in x2:
         print("{0}\n".format(y))
