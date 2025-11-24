@@ -1,14 +1,14 @@
-# first observations - assertion is commented out. assertion has a error in it's comparison. 
+from pathlib import Path
+from themes import x2, save_duties_to_html
 
-# solved - uncommented assetion, removed "pip".
+def test_html_created(tmp_path):
+    # temp directory unique to each test func
+    html = tmp_path / "duties.html" 
 
-# result of solving above - Test fails because x2 has a length of 6, likely a result of missing commas.
+    save_duties_to_html(x2, html)
 
-# solved - added commas where required in the x2 array
+    assert html.exists()
 
-# result of solving above - Test passes but array still contains duplicated and missing duties.
-
-from themes import x2
 def testIt():
     assert len(x2) > 10
     assert True is True

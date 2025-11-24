@@ -1,7 +1,3 @@
-# first observations - missing comma separators in the x2 array. Duty 12 is duplicated. Missing Duty 8.
-
-# solved - added commas where required, removed duplicated duty 12, added missing duty 8
-
 x2 = [
     "Duty 1 Script and code in at least one general purpose language and at least one domain-specific language to orchestrate infrastructure, follow test driven development and ensure appropriate test coverage.",
     "Duty 2 Initiate and facilitate knowledge sharing and technical collaboration with teams and individuals, with a focus on supporting development of team members.",
@@ -30,3 +26,5 @@ if __name__=="__main__":
     """)
     if x == '1':
         go()
+
+

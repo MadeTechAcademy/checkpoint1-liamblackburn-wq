@@ -61,3 +61,8 @@ Always reading from the list in memory might be troublesome, so feel free to ple
 
 After all this work, it still would be nice to have the results displayed on the screen. Could you find a Python library to do this? We can then give an option to the user to seen it on the screen, or download a file.
 
+## Sources
+https://www.w3schools.com/python/python_file_write.
+https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files
+https://www.geeksforgeeks.org/python/writing-to-file-in-python/
+https://docs.pytest.org/en/stable/how-to/tmp_path.html
