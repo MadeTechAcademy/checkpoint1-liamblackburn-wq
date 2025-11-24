@@ -14,13 +14,15 @@ x2 = [
     "Duty 13 Accept ownership of changes; embody the DevOps culture of 'you build it, you run it', with a relentless focus on the user experience.",
 ]#list of duties
 
+# if nothing passed to 2nd arg, default will always be "duties.html"
 def save_duties_to_html(duties, filename="duties.html"):
-    pass
+    with open(filename, "w", encoding="utf-8") as duties_file:
+        duties_file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>Apprentice Duties</title>\n</head>\n<body>\n")
+        duties_file.write("<h1>Apprentice Duties</h1>\n<ul>\n")    
 
-
-def go():
-    for y in x2:
-        print("{0}\n".format(y))
+# def go():
+#     for y in x2:
+#         print("{0}\n".format(y))
 
 if __name__=="__main__":
     x = input("""
@@ -29,6 +31,6 @@ if __name__=="__main__":
     Enter your choice:
     """)
     if x == '1':
-        go()
+        save_duties_to_html(x2)
 
 
