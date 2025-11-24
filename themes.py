@@ -1,4 +1,4 @@
-x2 = [
+duties_list = [
     "Duty 1 Script and code in at least one general purpose language and at least one domain-specific language to orchestrate infrastructure, follow test driven development and ensure appropriate test coverage.",
     "Duty 2 Initiate and facilitate knowledge sharing and technical collaboration with teams and individuals, with a focus on supporting development of team members.",
     "Duty 3 Engage in productive pair/mob programming to underpin the practice of peer review.",
@@ -14,6 +14,10 @@ x2 = [
     "Duty 13 Accept ownership of changes; embody the DevOps culture of 'you build it, you run it', with a relentless focus on the user experience.",
 ]#list of duties
 
+def display_duties_to_console():
+    for duty in duties_list:
+        print("{0}\n".format(duty))
+
 # if nothing passed to 2nd arg, default will always be "duties.html"
 def save_duties_to_html(duties, filename="duties.html"):
     with open(filename, "w", encoding="utf-8") as duties_file:
@@ -24,17 +28,18 @@ def save_duties_to_html(duties, filename="duties.html"):
             duties_file.write(f"<li>{duty}</li>\n")
         duties_file.write("</ul>\n</body>\n</html>")
 
-# def go():
-#     for y in x2:
-#         print("{0}\n".format(y))
+
 
 if __name__=="__main__":
-    x = input("""
+    choice = input("""
     Welcome to apprentice themes!\n
-    Press (1) to list all the duties\n
+    Press (1) to display the apprenticeship duties in the console.\n
+    Press (2) to save duties to an HTML file.
     Enter your choice:
     """)
-    if x == '1':
-        save_duties_to_html(x2)
+    if choice == "1":
+        display_duties_to_console()
+    elif choice == "2":
+        save_duties_to_html(duties_list)
 
 
