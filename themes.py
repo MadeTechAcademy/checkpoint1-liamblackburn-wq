@@ -18,7 +18,11 @@ x2 = [
 def save_duties_to_html(duties, filename="duties.html"):
     with open(filename, "w", encoding="utf-8") as duties_file:
         duties_file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>Apprentice Duties</title>\n</head>\n<body>\n")
-        duties_file.write("<h1>Apprentice Duties</h1>\n<ul>\n")    
+        duties_file.write("<h1>Apprentice Duties</h1>\n")
+        duties_file.write("\n<ul>\n")
+        for duty in duties:
+            duties_file.write(f"<li>{duty}</li>\n")
+        duties_file.write("</ul>\n</body>\n</html>")
 
 # def go():
 #     for y in x2:
