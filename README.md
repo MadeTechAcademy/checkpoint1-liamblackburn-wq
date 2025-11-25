@@ -39,7 +39,7 @@ As I mentioned where in _Bootcamp_ which is one of the themes of the apprentices
 
 Extend the options so that users can click a number for each of the additional themes. This should then write that theme __and__ the associated duties to a HTML file.
 
-Always reading from the list in memory might be troublesome, so feel free to please the duties in a file and read them from there.
+Always reading from the list in memory might be troublesome, so feel free to place the duties in a file and read them from there.
 
 ### Themes
 
