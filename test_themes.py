@@ -1,4 +1,4 @@
-from themes import duties_list, save_duties_to_html, save_theme_to_html, read_html
+from themes import duties_list, save_duties_to_html, save_theme_to_html, read_html, extract_themes_from_html
 
 # TDD Criteria
 def test_html_created(tmp_path):
@@ -22,8 +22,6 @@ def test_html_contains_duties(tmp_path):
     assert "<li>" and "</li>" in content 
     assert "Duty" in content
 
-# as a user, i want to select the Bootcamp theme and see duties 1, 2, 3, 4 and 13 displayed in a separate html file
-
 def test_themes_array(tmp_path):
     html_file = tmp_path / "bootcamp_duties.html"
     theme_name = duties_list[0]["name"]
@@ -35,6 +33,13 @@ def test_themes_array(tmp_path):
     assert theme_name in content
     for duty in duties:
         assert duty in content
+
+def test_theme_extraction_from_html(tmp_path):
+    html_file = tmp_path / "duties.html"
+
+    save_duties_to_html(duties_list, html_file)
+    
+    content = extract_themes_from_html(html_file)
 
 
 def test_correct_number_of_duties():

@@ -55,7 +55,10 @@ def display_duties_to_console():
     for duty in duties_list:
         print("{0}\n".format(duty))
 
-# if nothing passed to 2nd arg, default will always be "duties.html"
+def read_html(html_file):
+    with open(html_file, "r", encoding="utf-8") as duties_file:
+        return duties_file.read()
+    
 def save_duties_to_html(duties, filename="duties.html"):
     with open(filename, "w", encoding="utf-8") as duties_file:
         duties_file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>Apprentice Duties</title>\n</head>\n<body>\n")
@@ -75,16 +78,14 @@ def save_duties_to_html(duties, filename="duties.html"):
 def save_theme_to_html(name, duties, filename="theme.html"):
     with open(filename, "w", encoding="utf-8") as theme_file:
         theme_file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>Bootcamp Duties</title>\n</head>\n<body>\n")
-        theme_file.write(f"<h1>{name}</h1>\n")
-        theme_file.write("\n<ul>\n")
+        theme_file.write("  <header>\n")
+        theme_file.write(f"    <h1>{name}</h1>\n")
+        theme_file.write("  </header>\n")
+        theme_file.write("\n    <ul>\n")
         for duty in duties:
-            theme_file.write(f"  <li>{duty}</li>\n")
-        theme_file.write("</ul>\n")
-    theme_file.write("</body>\n</html>")
-            
-def read_html(html_file):
-    with open(html_file, "r", encoding="utf-8") as duties_file:
-        return duties_file.read()
+            theme_file.write(f"      <li>{duty}</li>\n")
+        theme_file.write("    </ul>\n")
+    theme_file.write("</body>\n</html>")   
 
 if __name__=="__main__":
     choice = input("""
