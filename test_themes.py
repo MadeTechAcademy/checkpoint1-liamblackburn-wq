@@ -1,4 +1,4 @@
-from themes import duties_list, duties_list_restructure, save_duties_to_html, save_theme_to_html, read_html
+from themes import duties_list, save_duties_to_html, save_theme_to_html, read_html
 
 # TDD Criteria
 def test_html_created(tmp_path):
@@ -26,8 +26,8 @@ def test_html_contains_duties(tmp_path):
 
 def test_themes_array(tmp_path):
     html_file = tmp_path / "bootcamp_duties.html"
-    theme_name = duties_list_restructure[0]["name"]
-    duties = duties_list_restructure[0]["duties"]
+    theme_name = duties_list[0]["name"]
+    duties = duties_list[0]["duties"]
 
     save_theme_to_html(theme_name, duties, html_file)
 
@@ -37,7 +37,12 @@ def test_themes_array(tmp_path):
         assert duty in content
 
 
-def testIt():
-    assert len(duties_list) == 13
+def test_correct_number_of_duties():
+    assert len(duties_list[0]["duties"]) == 5
+    assert len(duties_list[1]["duties"]) == 3
+    assert len(duties_list[2]["duties"]) == 4
+    assert len(duties_list[3]["duties"]) == 1
+    assert len(duties_list[4]["duties"]) == 1
+    assert len(duties_list[5]["duties"]) == 1
 
     
