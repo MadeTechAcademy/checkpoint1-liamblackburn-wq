@@ -1,4 +1,4 @@
-from themes import duties_list, duties_list_restructure, save_duties_to_html, read_html
+from themes import duties_list, duties_list_restructure, save_duties_to_html, save_theme_to_html, read_html
 
 # TDD Criteria
 def test_html_created(tmp_path):
@@ -28,6 +28,9 @@ def test_themes_array(tmp_path):
     html_file = tmp_path / "bootcamp_duties.html"
     theme_name = duties_list_restructure[0]["name"]
     duties = duties_list_restructure[0]["duties"]
+
+    save_theme_to_html(theme_name, duties, html_file)
+
     content = read_html(html_file)
     assert theme_name in content
     for duty in duties:

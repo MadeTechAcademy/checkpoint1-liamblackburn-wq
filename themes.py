@@ -78,9 +78,18 @@ def save_duties_to_html(duties, filename="duties.html"):
         duties_file.write("<h1>Apprentice Duties</h1>\n")
         duties_file.write("\n<ul>\n")
         for duty in duties:
-            duties_file.write(f"<li>{duty}</li>\n")
+            duties_file.write(f"  <li>{duty}</li>\n")
         duties_file.write("</ul>\n</body>\n</html>")
 
+def save_theme_to_html(name, duties, filename="theme.html"):
+    with open(filename, "w", encoding="utf-8") as theme_file:
+        theme_file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>Bootcamp Duties</title>\n</head>\n<body>\n")
+        theme_file.write(f"<h1>{name}</h1>\n")
+        theme_file.write("\n<ul>\n")
+        for duty in duties:
+            theme_file.write(f"  <li>{duty}</li>\n")
+        theme_file.write("</ul>\n</body>\n</html>")
+            
 def read_html(html_file):
     with open(html_file, "r", encoding="utf-8") as duties_file:
         return duties_file.read()
