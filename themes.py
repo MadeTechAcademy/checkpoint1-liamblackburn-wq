@@ -28,7 +28,9 @@ def save_duties_to_html(duties, filename="duties.html"):
             duties_file.write(f"<li>{duty}</li>\n")
         duties_file.write("</ul>\n</body>\n</html>")
 
-
+def read_html(html_file):
+    with open(html_file, "r", encoding="utf-8") as duties_file:
+        return duties_file.read()
 
 if __name__=="__main__":
     choice = input("""

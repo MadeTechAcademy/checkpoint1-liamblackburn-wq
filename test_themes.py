@@ -1,4 +1,4 @@
-from themes import duties_list, save_duties_to_html
+from themes import duties_list, save_duties_to_html, read_html
 
 # TDD Criteria
 def test_html_created(tmp_path):
@@ -11,11 +11,11 @@ def test_html_created(tmp_path):
 
 # ATDD Criteria (ensures program meets user expectation)
 def test_html_contains_duties(tmp_path):
-    html = tmp_path / "duties.html" 
+    html_file = tmp_path / "duties.html" 
 
-    save_duties_to_html(duties_list, html)
+    save_duties_to_html(duties_list, html_file)
 
-    content = html.read_text(encoding="utf-8")
+    content = read_html(html_file)
     
     assert "<html>" and "</html>" in content
     assert "<ul>" and "</ul>" in content
