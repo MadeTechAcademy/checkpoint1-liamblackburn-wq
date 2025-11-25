@@ -59,14 +59,18 @@ def display_duties_to_console():
 def save_duties_to_html(duties, filename="duties.html"):
     with open(filename, "w", encoding="utf-8") as duties_file:
         duties_file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>Apprentice Duties</title>\n</head>\n<body>\n")
-        duties_file.write("<h1>Apprentice Duties</h1>\n")
-        duties_file.write("\n<ul>\n")
+        duties_file.write("  <header>\n")
+        duties_file.write("    <h1>Apprentice Duties</h1>\n")
+        duties_file.write("  </header>\n")
+
         for theme in duties:
             theme_name = theme["name"]
-            duties_file.write(f"  <h2>{theme_name}</h2>\n")
+            duties_file.write(f"      <h2>{theme_name}</h2>")
+            duties_file.write("\n        <ul>\n")
             for duty in theme["duties"]:
-                duties_file.write(f"  <li>{duty}")
-        duties_file.write("</ul>\n</body>\n</html>")
+                duties_file.write(f"          <li>{duty}</li>\n")
+            duties_file.write("        </ul>\n")
+        duties_file.write("</body>\n</html>")
 
 def save_theme_to_html(name, duties, filename="theme.html"):
     with open(filename, "w", encoding="utf-8") as theme_file:
@@ -75,7 +79,8 @@ def save_theme_to_html(name, duties, filename="theme.html"):
         theme_file.write("\n<ul>\n")
         for duty in duties:
             theme_file.write(f"  <li>{duty}</li>\n")
-        theme_file.write("</ul>\n</body>\n</html>")
+        theme_file.write("</ul>\n")
+    theme_file.write("</body>\n</html>")
             
 def read_html(html_file):
     with open(html_file, "r", encoding="utf-8") as duties_file:
