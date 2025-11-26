@@ -1,6 +1,22 @@
 import os
-from tkinter import Tk, Frame, Button, filedialog
+import tkinter as tk
 from tkhtmlview import HTMLLabel
+
+root = tk.Tk()
+root.title("My First GUI")
+root.geometry("600x400")
+
+label = tk.Label(root, text="Welcome to my GUI!", font=("Arial", 16))
+label.pack(pady=20)
+
+html_content = """
+<h2 style='color:blue;'>Hey there space cowboy!</h2>
+"""
+html_label = HTMLLabel(root, html=html_content)
+html_label.pack(pady=20, fill="both", expand=True)
+
+root.mainloop()
+
 
 duties_list = [
     {
@@ -113,7 +129,6 @@ def extract_themes_from_html(html_file, output_dir=None):
     return current_theme
 
 if __name__=="__main__":
-
     choice = input("""
     Welcome to apprentice themes!\n
     Press (1) to display the apprenticeship duties in the console.\n
