@@ -1,5 +1,6 @@
 import os
 import tkinter as tk
+from tkinter import filedialog
 from tkhtmlview import HTMLLabel
 
 duties_list = [
@@ -116,12 +117,14 @@ def extract_themes_from_html(html_file, output_dir=None):
 
 root = tk.Tk()
 root.title("Apprentice Duty Library")
-root.geometry("1080x1920")
 
 label = tk.Label(root, text="Welcome to your apprentice duty library!", font=("Arial", 16))
 label.pack(pady=20)
 
-html_label = HTMLLabel(root, html="<h1>Would you like to display or download your duties?</h1>")
+display_frame = tk.Frame(root)
+display_frame.pack(fill="both", expand=True)
+
+html_label = HTMLLabel(display_frame, html="<h1>Would you like to display or download your duties?</h1>")
 html_label.pack(pady=20, fill="both")
 
 def display_duties():
@@ -131,43 +134,56 @@ def display_duties():
 
     html_label.set_html(html_content)
 
-button = tk.Button(root, text='Display Duties', command=display_duties)
+def download_duties():
+    file_path = filedialog.asksaveasfilename(
+    defaultextension=".html",
+    )
+    if file_path:
+        save_duties_to_html(duties_list, file_path)
+
+control_frame = tk.Frame(root)
+control_frame.pack(pady=10)
+
+button = tk.Button(control_frame, text='Display Duties', command=display_duties)
+button.pack(pady=10)
+
+button = tk.Button(control_frame, text='Download Duties', command=download_duties)
 button.pack(pady=10)
 
 root.mainloop()
 
-if __name__=="__main__":
-    choice = input("""
-    Welcome to apprentice themes!\n
-    Press (1) to display the apprenticeship duties in the console.\n
-    Press (2) to save duties to an HTML file.\n
-    Press (3) to extract themes from generated HTML file and save each theme separately.\n
-    Press (4) to save a single theme by name.\n
-    Enter your choice:
-    """)
-    if choice == "1":
-        display_duties_to_console()
+# if __name__=="__main__":
+#     choice = input("""
+#     Welcome to apprentice themes!\n
+#     Press (1) to display the apprenticeship duties in the console.\n
+#     Press (2) to save duties to an HTML file.\n
+#     Press (3) to extract themes from generated HTML file and save each theme separately.\n
+#     Press (4) to save a single theme by name.\n
+#     Enter your choice:
+#     """)
+#     if choice == "1":
+#         display_duties_to_console()
 
-    elif choice == "2":
-        save_duties_to_html(duties_list)
-        duties_file_created = True
-        print("Duties saved to duties.html")
+#     elif choice == "2":
+#         save_duties_to_html(duties_list)
+#         duties_file_created = True
+#         print("Duties saved to duties.html")
 
-    elif choice == "3":
-        if os.path.exists("duties.html"):
-            themes = extract_themes_from_html("duties.html")
-            print("Themes extracted and saved")
-        else:
-            print("Please generate duties first with option 2 before extracting themes")
+#     elif choice == "3":
+#         if os.path.exists("duties.html"):
+#             themes = extract_themes_from_html("duties.html")
+#             print("Themes extracted and saved")
+#         else:
+#             print("Please generate duties first with option 2 before extracting themes")
 
-    elif choice == "4":
-        theme_name = input("Enter the theme name: ")
-        for theme in duties_list:
-            if theme["name"].lower() == theme_name.lower():
-                save_theme_to_html(theme["name"], theme["duties"])
-                print(f"Saved {theme['name']} to {theme['name']}.html")
-                break
-        else:
-            print("Theme not found.")
-    else:
-        print("Invalid choice. Please select option 1, 2, 3 or 4")
+#     elif choice == "4":
+#         theme_name = input("Enter the theme name: ")
+#         for theme in duties_list:
+#             if theme["name"].lower() == theme_name.lower():
+#                 save_theme_to_html(theme["name"], theme["duties"])
+#                 print(f"Saved {theme['name']} to {theme['name']}.html")
+#                 break
+#         else:
+#             print("Theme not found.")
+#     else:
+#         print("Invalid choice. Please select option 1, 2, 3 or 4")
