@@ -22,14 +22,14 @@ def test_html_contains_duties(tmp_path):
     assert "<li>" and "</li>" in content 
     assert "Duty" in content
 
-def test_themes_array(tmp_path):
-    html_file = tmp_path / "bootcamp_duties.html"
+def test_themes_array():
     theme_name = duties_list[0]["name"]
     duties = duties_list[0]["duties"]
 
-    save_theme_to_html(theme_name, duties, html_file)
+    save_theme_to_html(theme_name, duties)
 
-    content = read_html(html_file)
+    content = read_html(f"{theme_name}.html")
+
     assert theme_name in content
     for duty in duties:
         assert duty in content
