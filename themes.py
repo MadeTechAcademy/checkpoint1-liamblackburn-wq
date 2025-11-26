@@ -2,22 +2,6 @@ import os
 import tkinter as tk
 from tkhtmlview import HTMLLabel
 
-root = tk.Tk()
-root.title("My First GUI")
-root.geometry("600x400")
-
-label = tk.Label(root, text="Welcome to my GUI!", font=("Arial", 16))
-label.pack(pady=20)
-
-html_content = """
-<h2 style='color:blue;'>Hey there space cowboy!</h2>
-"""
-html_label = HTMLLabel(root, html=html_content)
-html_label.pack(pady=20, fill="both", expand=True)
-
-root.mainloop()
-
-
 duties_list = [
     {
         "name": "Bootcamp",
@@ -127,6 +111,30 @@ def extract_themes_from_html(html_file, output_dir=None):
             else:
                 save_theme_to_html(name, duties)
     return current_theme
+
+# gui logic
+
+root = tk.Tk()
+root.title("Apprentice Duty Library")
+root.geometry("1080x1920")
+
+label = tk.Label(root, text="Welcome to your apprentice duty library!", font=("Arial", 16))
+label.pack(pady=20)
+
+html_label = HTMLLabel(root, html="<h1>Would you like to display or download your duties?</h1>")
+html_label.pack(pady=20, fill="both")
+
+def display_duties():
+    save_duties_to_html(duties_list, "duties.html")
+    with open("duties.html", "r", encoding="utf-8") as duties_file:
+        html_content = duties_file.read()
+
+    html_label.set_html(html_content)
+
+button = tk.Button(root, text='Display Duties', command=display_duties)
+button.pack(pady=10)
+
+root.mainloop()
 
 if __name__=="__main__":
     choice = input("""
