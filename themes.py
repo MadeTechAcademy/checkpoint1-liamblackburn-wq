@@ -1,3 +1,5 @@
+import os
+
 duties_list = [
     {
         "name": "Bootcamp",
@@ -76,7 +78,8 @@ def save_duties_to_html(duties, filename="duties.html"):
         duties_file.write("</body>\n</html>")
 
 def save_theme_to_html(name, duties, filename=None):
-    filename = f"{name}.html"
+    if filename is None:
+        filename = f"{name}.html"
 
     with open(filename, "w", encoding="utf-8") as theme_file:
         theme_file.write(f"<!DOCTYPE html>\n<html>\n<head>\n<title>{name}</title>\n</head>\n<body>\n")
@@ -89,7 +92,7 @@ def save_theme_to_html(name, duties, filename=None):
         theme_file.write("    </ul>\n")
         theme_file.write("</body>\n</html>")        
                 
-def extract_themes_from_html(html_file):
+def extract_themes_from_html(html_file, output_dir=None):
     current_theme = {}
     with open(html_file, "r", encoding="utf-8") as duties_file:
         for line in duties_file:
@@ -101,20 +104,46 @@ def extract_themes_from_html(html_file):
                 duty_text = line.replace("<li>", "").replace("</li>", "").strip()
                 current_theme[active_theme].append(duty_text)
         for name, duties in current_theme.items():
-            save_theme_to_html(name, duties)
+            if output_dir:
+                save_theme_to_html(name, duties, output_dir / f"{name}.html")
+            else:
+                save_theme_to_html(name, duties)
     return current_theme
 
 if __name__=="__main__":
+
     choice = input("""
     Welcome to apprentice themes!\n
     Press (1) to display the apprenticeship duties in the console.\n
-    Press (2) to save duties to an HTML file.
+    Press (2) to save duties to an HTML file.\n
+    Press (3) to extract themes from generated HTML file and save each theme separately.\n
+    Press (4) to save a single theme by name.\n
     Enter your choice:
     """)
     if choice == "1":
         display_duties_to_console()
+
     elif choice == "2":
         save_duties_to_html(duties_list)
+        duties_file_created = True
+        print("Duties saved to duties.html")
+
+    elif choice == "3":
+        if os.path.exists("duties.html"):
+            themes = extract_themes_from_html("duties.html")
+            print("Themes extracted and saved")
+        else:
+            print("Please generate duties first with option 2 before extracting themes")
+
+    elif choice == "4":
+        theme_name = input("Enter the theme name: ")
+        for theme in duties_list:
+            if theme["name"].lower() == theme_name.lower():
+                save_theme_to_html(theme["name"], theme["duties"])
+                print(f"Saved {theme['name']} to {theme['name']}.html")
+                break
+        else:
+            print("Theme not found.")
     else:
-        print("Invalid choice. Please select option 1 or option 2")
+        print("Invalid choice. Please select option 1, 2, 3 or 4")
 

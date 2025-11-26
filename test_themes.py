@@ -22,13 +22,15 @@ def test_html_contains_duties(tmp_path):
     assert "<li>" and "</li>" in content 
     assert "Duty" in content
 
-def test_themes_array():
+def test_themes_array(tmp_path):
     theme_name = duties_list[0]["name"]
     duties = duties_list[0]["duties"]
 
-    save_theme_to_html(theme_name, duties)
+    html_file = tmp_path / f"{theme_name}.html"
 
-    content = read_html(f"{theme_name}.html")
+    save_theme_to_html(theme_name, duties, html_file)
+
+    content = read_html(html_file)
 
     assert theme_name in content
     for duty in duties:
@@ -39,18 +41,13 @@ def test_theme_extraction_from_html(tmp_path):
     html_file = tmp_path / "duties.html"
     save_duties_to_html(duties_list, html_file)
 
-    themes = extract_themes_from_html(html_file)
+    themes = extract_themes_from_html(html_file, tmp_path)
 
     for theme_name, duties in themes.items():
-        content = read_html(f"{theme_name}.html")
+        content = read_html(tmp_path / f"{theme_name}.html")
         assert theme_name in content
         for duty in duties:
             assert duty in content
-
-
-    
-
-
 
 def test_correct_number_of_duties():
     assert len(duties_list[0]["duties"]) == 5

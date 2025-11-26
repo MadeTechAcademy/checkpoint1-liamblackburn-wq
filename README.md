@@ -59,7 +59,7 @@ Always reading from the list in memory might be troublesome, so feel free to pla
 
 ## Part 4-As Seen On Screen :star::star::star::star:
 
-After all this work, it still would be nice to have the results displayed on the screen. Could you find a Python library to do this? We can then give an option to the user to seen it on the screen, or download a file.
+After all this work, it still would be nice to have the results displayed on the screen. Could you find a Python library to do this? We can then give an option to the user to see it on the screen, or download a file.
 
 ## Sources
 https://www.w3schools.com/python/python_file_write.
