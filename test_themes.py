@@ -38,8 +38,20 @@ def test_theme_extraction_from_html(tmp_path):
     html_file = tmp_path / "duties.html"
 
     save_duties_to_html(duties_list, html_file)
+
+    themes_html = extract_themes_from_html(html_file)
+
+    content = read_html(themes_html)
     
-    content = extract_themes_from_html(html_file)
+    assert "Bootcamp" in content
+    assert "Automate!" in content
+    assert "Houston, Prepare to Launch" in content
+    assert "Going Deeper" in content
+    assert "Assemble!" in content
+    assert "Call Security" in content
+
+    
+
 
 
 def test_correct_number_of_duties():
@@ -49,5 +61,7 @@ def test_correct_number_of_duties():
     assert len(duties_list[3]["duties"]) == 1
     assert len(duties_list[4]["duties"]) == 1
     assert len(duties_list[5]["duties"]) == 1
+
+
 
     

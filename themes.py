@@ -85,7 +85,15 @@ def save_theme_to_html(name, duties, filename="theme.html"):
         for duty in duties:
             theme_file.write(f"      <li>{duty}</li>\n")
         theme_file.write("    </ul>\n")
-    theme_file.write("</body>\n</html>")   
+    theme_file.write("</body>\n</html>")        
+                
+# testing for loops to create variables per theme name
+
+for theme in duties_list:
+    theme_name = theme["name"]
+    theme_duties = theme["duties"]
+    print(theme_name)
+    print(theme_duties)
 
 if __name__=="__main__":
     choice = input("""
