@@ -75,9 +75,11 @@ def save_duties_to_html(duties, filename="duties.html"):
             duties_file.write("        </ul>\n")
         duties_file.write("</body>\n</html>")
 
-def save_theme_to_html(name, duties, filename="theme.html"):
+def save_theme_to_html(name, duties, filename=None):
+    filename = f"{name}.html"
+
     with open(filename, "w", encoding="utf-8") as theme_file:
-        theme_file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>Bootcamp Duties</title>\n</head>\n<body>\n")
+        theme_file.write(f"<!DOCTYPE html>\n<html>\n<head>\n<title>{name}</title>\n</head>\n<body>\n")
         theme_file.write("  <header>\n")
         theme_file.write(f"    <h1>{name}</h1>\n")
         theme_file.write("  </header>\n")
@@ -85,15 +87,22 @@ def save_theme_to_html(name, duties, filename="theme.html"):
         for duty in duties:
             theme_file.write(f"      <li>{duty}</li>\n")
         theme_file.write("    </ul>\n")
-    theme_file.write("</body>\n</html>")        
+        theme_file.write("</body>\n</html>")        
                 
-# testing for loops to create variables per theme name
-
-for theme in duties_list:
-    theme_name = theme["name"]
-    theme_duties = theme["duties"]
-    print(theme_name)
-    print(theme_duties)
+def extract_themes_from_html(html_file):
+    current_theme = {}
+    with open(html_file, "r", encoding="utf-8") as duties_file:
+        for line in duties_file:
+            if "<h2>" in line:
+                theme_name = line.replace("<h2>", "").replace("</h2>", "").strip()
+                current_theme[theme_name] = []
+                active_theme = theme_name
+            elif "<li>" in line:
+                duty_text = line.replace("<li>", "").replace("</li>", "").strip()
+                current_theme[active_theme].append(duty_text)
+        for name, duties in current_theme.items():
+            save_theme_to_html(name, duties)
+    return current_theme
 
 if __name__=="__main__":
     choice = input("""
