@@ -1,4 +1,6 @@
 import os
+from tkinter import Tk, Frame, Button, filedialog
+from tkhtmlview import HTMLLabel
 
 duties_list = [
     {
@@ -146,4 +148,3 @@ if __name__=="__main__":
             print("Theme not found.")
     else:
         print("Invalid choice. Please select option 1, 2, 3 or 4")
-

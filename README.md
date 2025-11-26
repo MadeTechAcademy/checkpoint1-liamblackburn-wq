@@ -68,3 +68,6 @@ https://www.geeksforgeeks.org/python/writing-to-file-in-python/
 https://docs.pytest.org/en/stable/how-to/tmp_path.html
 https://decode.agency/article/tdd-vs-bdd-vs-attd/
 https://www.geeksforgeeks.org/python/python-extract-key-value-of-dictionary-in-variables/
+https://tkdocs.com/tutorial/index.html
+https://docs.python.org/3/library/dialog.
+https://www.geeksforgeeks.org/python/how-to-use-html-in-tkinter-python/html#module-tkinter.filedialog
