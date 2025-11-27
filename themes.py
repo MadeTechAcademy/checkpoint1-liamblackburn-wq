@@ -1,4 +1,4 @@
-import os
+# import os
 import tkinter as tk
 from tkinter import filedialog
 from tkhtmlview import HTMLLabel
@@ -56,17 +56,13 @@ duties_list = [
     }
 ]
 
-# def display_duties_to_console():
-#     for duty in duties_list:
-#         print("{0}\n".format(duty))
-
 def read_html(html_file):
     with open(html_file, "r", encoding="utf-8") as duties_file:
         return duties_file.read()
     
-def save_duties_to_html(duties, filename="duties.html"):
+def display_to_gui(duties, filename="duties.html"):
     with open(filename, "w", encoding="utf-8") as duties_file:
-        duties_file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>Apprentice Duties</title>\n</head>\n<body>\n")
+        duties_file.write("<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n")
         duties_file.write("  <header>\n")
         duties_file.write("    <h1>Apprentice Duties</h1>\n")
         duties_file.write("  </header>\n")
@@ -125,11 +121,11 @@ label.pack(pady=20)
 display_frame = tk.Frame(root, bg="white", relief="solid", bd=1)
 display_frame.pack(fill="both", expand=True)
 
-html_label = HTMLLabel(display_frame, html="<h1>Would you like to display or download your duties?</h1>")
+html_label = HTMLLabel(display_frame, html="<h1 style='text-align: center'>Would you like to display or download your duties?</h1>")
 html_label.pack(pady=20, fill="both")
 
 def display_duties():
-    save_duties_to_html(duties_list, "duties.html")
+    display_to_gui(duties_list, "duties.html")
     with open("duties.html", "r", encoding="utf-8") as duties_file:
         html_content = duties_file.read()
 
@@ -143,40 +139,41 @@ def download_duties():
         title="Save your apprentice duties"
     )
         if file_path:
-            save_duties_to_html(duties_list, file_path)
+            display_to_gui(duties_list, file_path)
     
     else:
         filtered = [theme for theme in duties_list if theme["name"] == selected_theme.get()]
         if filtered:
+            download_button.pack(pady=10)
             file_path = filedialog.asksaveasfilename(
-        defaultextension=".html",
-        initialdir="~/Documents",
-        title="Save your apprentice duties"
+            defaultextension=".html",
+            initialdir="~/Documents",
+            title="Save your apprentice duties"
     )
             if file_path:
-                save_duties_to_html(filtered, file_path)
+                display_to_gui(filtered, file_path)
             
-
-    
-
 control_frame = tk.Frame(root, bg="#104060", relief="raised", bd=1, padx=10)
 control_frame.pack(pady=10)
 
-button = tk.Button(control_frame, text="Display Duties", command=display_duties,
-                   font=("Arial", 16), padx=10, pady=5)
-
-button.pack(pady=10)
-
-button = tk.Button(control_frame, text='Download Duties', command=download_duties,
-                   font=("Arial", 16), padx=10, pady=5)
-button.pack(pady=10)
+display_button = tk.Button(control_frame, text="Display Duties", command=display_duties,
+                   font=("Arial", 16), padx=10)
+display_button.pack(pady=10)
 
 themes = ["All"] + [theme["name"] for theme in duties_list]
-selected_theme = tk.StringVar(value="All")
+selected_theme = tk.StringVar(value="Please choose duties to download")
 dropdown = tk.OptionMenu(control_frame, selected_theme, *themes)
 dropdown.pack(pady=10)
 
+download_button = tk.Button(control_frame, text='Download Duties', command=download_duties,
+                   font=("Arial", 16), padx=10)
+download_button.pack(pady=10)
+
 root.mainloop()
+
+# def display_duties_to_console():
+#     for duty in duties_list:
+#         print("{0}\n".format(duty))
 
 # if __name__=="__main__":
 #     choice = input("""
@@ -191,7 +188,7 @@ root.mainloop()
 #         display_duties_to_console()
 
 #     elif choice == "2":
-#         save_duties_to_html(duties_list)
+#         display_to_gui(duties_list)
 #         duties_file_created = True
 #         print("Duties saved to duties.html")
 

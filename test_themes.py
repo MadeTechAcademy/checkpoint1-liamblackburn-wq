@@ -1,11 +1,11 @@
-from themes import duties_list, save_duties_to_html, save_theme_to_html, read_html, extract_themes_from_html
+from themes import duties_list, display_to_gui, save_theme_to_html, read_html, extract_themes_from_html
 
 # TDD Criteria
 def test_html_created(tmp_path):
     # temp directory unique to each test func
     html = tmp_path / "duties.html" 
 
-    save_duties_to_html(duties_list, html)
+    display_to_gui(duties_list, html)
 
     assert html.exists()
 
@@ -13,7 +13,7 @@ def test_html_created(tmp_path):
 def test_html_contains_duties(tmp_path):
     html_file = tmp_path / "duties.html" 
 
-    save_duties_to_html(duties_list, html_file)
+    display_to_gui(duties_list, html_file)
 
     content = read_html(html_file)
     
@@ -39,7 +39,7 @@ def test_themes_array(tmp_path):
 def test_theme_extraction_from_html(tmp_path):
 
     html_file = tmp_path / "duties.html"
-    save_duties_to_html(duties_list, html_file)
+    display_to_gui(duties_list, html_file)
 
     themes = extract_themes_from_html(html_file, tmp_path)
 
@@ -56,7 +56,4 @@ def test_correct_number_of_duties():
     assert len(duties_list[3]["duties"]) == 1
     assert len(duties_list[4]["duties"]) == 1
     assert len(duties_list[5]["duties"]) == 1
-
-
-
     
