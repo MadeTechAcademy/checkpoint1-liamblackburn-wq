@@ -56,9 +56,9 @@ duties_list = [
     }
 ]
 
-def display_duties_to_console():
-    for duty in duties_list:
-        print("{0}\n".format(duty))
+# def display_duties_to_console():
+#     for duty in duties_list:
+#         print("{0}\n".format(duty))
 
 def read_html(html_file):
     with open(html_file, "r", encoding="utf-8") as duties_file:
@@ -117,11 +117,12 @@ def extract_themes_from_html(html_file, output_dir=None):
 
 root = tk.Tk()
 root.title("Apprentice Duty Library")
+root.configure(bg="#f0f0f0")
 
-label = tk.Label(root, text="Welcome to your apprentice duty library!", font=("Arial", 16))
+label = tk.Label(root, text="Welcome to your apprentice duty library!", font=("Arial", 22, "bold"), fg="#2c3e50", bg="#f0f0f0")
 label.pack(pady=20)
 
-display_frame = tk.Frame(root)
+display_frame = tk.Frame(root, bg="white", relief="solid", bd=1)
 display_frame.pack(fill="both", expand=True)
 
 html_label = HTMLLabel(display_frame, html="<h1>Would you like to display or download your duties?</h1>")
@@ -137,18 +138,28 @@ def display_duties():
 def download_duties():
     file_path = filedialog.asksaveasfilename(
     defaultextension=".html",
+    initialdir="~/Documents",
+    title="Save your apprentice duties"
     )
     if file_path:
         save_duties_to_html(duties_list, file_path)
 
-control_frame = tk.Frame(root)
+control_frame = tk.Frame(root, bg="#104060", relief="raised", bd=1, padx=10)
 control_frame.pack(pady=10)
 
-button = tk.Button(control_frame, text='Display Duties', command=display_duties)
+button = tk.Button(control_frame, text="Display Duties", command=display_duties,
+                   font=("Arial", 16), padx=10, pady=5)
+
 button.pack(pady=10)
 
-button = tk.Button(control_frame, text='Download Duties', command=download_duties)
+button = tk.Button(control_frame, text='Download Duties', command=download_duties,
+                   font=("Arial", 16), padx=10, pady=5)
 button.pack(pady=10)
+
+themes = ["All"] + [theme["name"] for theme in duties_list]
+selected_theme = tk.StringVar(value="All")
+dropdown = tk.OptionMenu(control_frame, selected_theme, themes)
+dropdown.pack(pady=10)
 
 root.mainloop()
 
