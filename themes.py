@@ -136,13 +136,28 @@ def display_duties():
     html_label.set_html(html_content)
 
 def download_duties():
-    file_path = filedialog.asksaveasfilename(
-    defaultextension=".html",
-    initialdir="~/Documents",
-    title="Save your apprentice duties"
+    if selected_theme.get() == "All":
+        file_path = filedialog.asksaveasfilename(
+        defaultextension=".html",
+        initialdir="~/Documents",
+        title="Save your apprentice duties"
     )
-    if file_path:
-        save_duties_to_html(duties_list, file_path)
+        if file_path:
+            save_duties_to_html(duties_list, file_path)
+    
+    else:
+        filtered = [theme for theme in duties_list if theme["name"] == selected_theme.get()]
+        if filtered:
+            file_path = filedialog.asksaveasfilename(
+        defaultextension=".html",
+        initialdir="~/Documents",
+        title="Save your apprentice duties"
+    )
+            if file_path:
+                save_duties_to_html(filtered, file_path)
+            
+
+    
 
 control_frame = tk.Frame(root, bg="#104060", relief="raised", bd=1, padx=10)
 control_frame.pack(pady=10)
@@ -158,7 +173,7 @@ button.pack(pady=10)
 
 themes = ["All"] + [theme["name"] for theme in duties_list]
 selected_theme = tk.StringVar(value="All")
-dropdown = tk.OptionMenu(control_frame, selected_theme, themes)
+dropdown = tk.OptionMenu(control_frame, selected_theme, *themes)
 dropdown.pack(pady=10)
 
 root.mainloop()
